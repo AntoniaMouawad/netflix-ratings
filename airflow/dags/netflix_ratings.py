@@ -1,11 +1,14 @@
 from airflow import DAG
-from datetime import datetime, timedelta
+import datetime
+from datetime import timedelta
 from airflow.operators.dummy import DummyOperator
+from airflow.providers.postgres.operators.postgres import PostgresOperator
 
 default_args = {
     'owner': 'antoniam',
     'depends_on_past': False,
     'retries': 0,
+    'start_date': datetime.datetime(2015, 10, 10),
     'retry_delay': timedelta(minutes=5),
     'email_on_failure': False,
     'catchup': False
@@ -17,7 +20,10 @@ dag = DAG('netflix-ratings',
           )
 
 start_operator = DummyOperator(task_id='start_execution', dag=dag)
-create_tables = DummyOperator(task_id='create_tables', dag=dag)
+create_tables = PostgresOperator(task_id='create_tables',
+                                 dag=dag,
+                                 postgres_conn_id='redshift',
+                                 sql='/sql/create_tables.sql')
 
 # Stage the tables
 stage_imdb_titles = DummyOperator(task_id='stage_imdb_titles_to_redshift', dag=dag)
@@ -59,3 +65,10 @@ stage_imdb_ratings >> load_titles
 stage_rt_titles >> load_titles
 load_roles >> load_titles
 load_persons >> load_titles
+
+load_titles >> run_checks
+load_persons >> run_checks
+load_roles >> run_checks
+load_genres >> run_checks
+
+run_checks >> end_operator

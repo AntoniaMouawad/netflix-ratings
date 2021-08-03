@@ -7,9 +7,10 @@ The result can potentially be used by an app to display all the info related to 
 
 ### Data
 We use three main sources of data:
-- netflix: https://www.kaggle.com/shivamb/netflix-shows
-- imdb: https://datasets.imdbws.com/
-- rotten tomatoes: https://www.kaggle.com/stefanoleone992/rotten-tomatoes-movies-and-critic-reviews-dataset
+- [netflix shows](https://www.kaggle.com/shivamb/netflix-shows)
+- [imdb](https://datasets.imdbws.com/) - multiple tables
+- [rotten tomatoes movies](https://www.kaggle.com/stefanoleone992/rotten-tomatoes-movies-and-critic-reviews-dataset)
+
 Data dictionary can be found under `data_dictionary`
 Example datapoints can be found under `exploration.ipynb`
 

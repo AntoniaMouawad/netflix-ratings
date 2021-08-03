@@ -10,7 +10,8 @@ We use three main sources of data:
 - netflix: https://www.kaggle.com/shivamb/netflix-shows
 - imdb: https://datasets.imdbws.com/
 - rotten tomatoes: https://www.kaggle.com/stefanoleone992/rotten-tomatoes-movies-and-critic-reviews-dataset
-Data exploration and dictionary can be found in the notebook `final_project.ipynb`
+Data dictionary can be found under `data_dictionary`
+Example datapoints can be found under `exploration.ipynb`
 
 ### Data Model
 Start schema with a bridge. 
@@ -65,7 +66,7 @@ Is there a correlation between:
 Recommend horror movies released after 2016 with rotten tomatoes critics score higher than 70, ordered by imdb score
 ![Alt text](img/recommendation.png?raw=true "Correlation")
 
-Please refer to the notebook `final_project.ipynb`
+Please refer to the notebook `netflix_ratings.ipynb`
 
 ### Choice of technology
 - Wanted to practice using postgresql.

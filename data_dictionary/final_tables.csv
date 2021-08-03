@@ -1,0 +1,32 @@
+Data Source,column_name,constraint,example,description
+titles,id,SERIAL Primary key,1,title of the movie as displayed on the Rotten Tomatoes website
+,netflix_id,,s1004,netflix id
+,imdb_id,,tt1120985,Imdb id
+,rt_id,,m/blue_valentine,Rotten tomatoes id
+,type,,Movie,movie/tv show
+,name,,Blue Valentine,Movie/tv show name
+,normalized_name,,blue valentine,Lower cased title
+,netflix_description,,"As Cindy and Dean muddle through their languishing marriage, they hearken back to the golden days when life was filled with possibility and romance.",Description on Netflix
+,release_year,,2010,Year of release of the movie/show
+,runtime_minutes,,109.23,Movie runtime in mins
+,country,,109.23,Movie country
+,"rated
+",,R,Movie rating
+,imdb_avg_score,,8.63,Average imdv score /10
+,imdb_n_ratings,,40,Number of people who rated the score
+,rt_critics_score,,78,critic ratings counted for the calculation of the critics status /100
+,rt_n_critics,,Spilled,count of top critic ratings
+,rt_audience_score,,50,Audience ratings counted for the calculation of the tomatomer status /100
+,rt_n_audience,,1335,user ratings counted for the calculation of the audience status
+,rt_concensus,,This is a great and brilliant movie,Concensus on rotten tomatoes
+Genres,Id,SERIAL Primary key,0,
+,title_id,NOT NULL ,tt1120985,Imdb title id
+,genre_name,NOT NULL ,Romance,Genre 
+Persons,Id,SERIAL Primary key,0,
+,full_name,NOT NULL ,Angelina Jolie,Full name
+,burth_year,,1995,
+,death_year,,-,"Can be null, death year"
+Roles,Id,SERIAL Primary key,0,
+,title_id,NOT NULL ,tt1120985,Imdb title id
+,person_id,NOT NULL,n146369,Id in person table
+,role_name,,Role in specific title,"Actor, director, writer, actress"

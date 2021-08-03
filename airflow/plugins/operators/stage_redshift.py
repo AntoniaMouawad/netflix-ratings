@@ -13,6 +13,7 @@ class StageToRedshiftOperator(BaseOperator):
                  s3_bucket="",
                  s3_key="",
                  table="",
+                 delimiter="",
                  *args, **kwargs):
         super(StageToRedshiftOperator, self).__init__(*args, **kwargs)
         self.redshift_conn_id = redshift_conn_id
@@ -20,6 +21,7 @@ class StageToRedshiftOperator(BaseOperator):
         self.s3_bucket = s3_bucket
         self.s3_key = s3_key
         self.table = table
+        self.delimiter = delimiter
 
     def execute(self, context):
         aws_hook = AwsBaseHook(self.aws_credentials_id)
@@ -35,4 +37,4 @@ class StageToRedshiftOperator(BaseOperator):
         s3_path = f"s3://{self.s3_bucket}/{rendered_key}"
 
         redshift.run(f"COPY {self.table} FROM '{s3_path}' ACCESS_KEY_ID '{aws_credentials.access_key}' \
-            SECRET_ACCESS_KEY '{aws_credentials.secret_key}' delimiter '\t' CSV HEADER'")
+            SECRET_ACCESS_KEY '{aws_credentials.secret_key}' delimiter {self.delimiter} CSV HEADER'")

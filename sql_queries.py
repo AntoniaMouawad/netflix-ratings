@@ -141,22 +141,22 @@ drop_staging_imdb_crew = """DROP TABLE IF EXISTS staging_imdb_crew"""
 drop_staging_imdb_names = """DROP TABLE IF EXISTS staging_imdb_names"""
 drop_staging_rotten_tomatoes_titles = """DROP TABLE IF EXISTS staging_rotten_tomatoes_titles"""
 drop_staging_netflix_titles = """DROP TABLE IF EXISTS staging_netflix_titles"""
-drop_titles = """DROP TABLE IF EXISTS EXISTS titles"""
+drop_titles = """DROP TABLE IF EXISTS titles"""
 drop_roles = """DROP TABLE IF EXISTS roles"""
-drop_persons = """DROP TABLE IF NOT EXISTS persons"""
+drop_persons = """DROP TABLE IF EXISTS persons"""
 drop_genres = """DROP TABLE IF EXISTS genres"""
 
 drop_table_queries = [drop_staging_imdb_titles, drop_staging_imdb_ratings, drop_staging_imdb_principals,
                       drop_staging_imdb_crew, drop_staging_imdb_names, drop_staging_rotten_tomatoes_titles,
                       drop_staging_netflix_titles, drop_titles, drop_roles, drop_persons, drop_genres]
 
-copy_staging_titles = f"COPY staging_imdb_titles FROM '{config['DATA_PATH']['imdb_titles_path']}' delimiter '\t' CSV HEADER"
-copy_staging_ratings = f"COPY staging_imdb_ratings FROM '{config['DATA_PATH']['imdb_ratings_path']}' delimiter '\t' CSV HEADER"
-copy_staging_principals = f"COPY staging_imdb_principals FROM '{config['DATA_PATH']['imdb_principals_path']}' delimiter '\t' CSV HEADER"
-copy_staging_crew = f"COPY staging_imdb_crew FROM '{config['DATA_PATH']['imdb_crew_path']}' delimiter '\t' CSV HEADER"
-copy_staging_names = f"COPY staging_imdb_names FROM '{config['DATA_PATH']['imdb_names_path']}' delimiter '\t' CSV HEADER"
-copy_staging_rt = f"COPY staging_rotten_tomatoes_titles FROM '{config['DATA_PATH']['rotten_tomatoes_movies_path']}' delimiter ',' CSV HEADER"
-copy_staging_netflix = f"COPY staging_netflix_titles FROM '{config['DATA_PATH']['netflix_titles_path']}' delimiter ',' CSV HEADER"
+copy_staging_titles = f"COPY staging_imdb_titles FROM {config['DATA_PATH']['imdb_titles_path']} delimiter '\t' CSV HEADER"
+copy_staging_ratings = f"COPY staging_imdb_ratings FROM {config['DATA_PATH']['imdb_ratings_path']} delimiter '\t' CSV HEADER"
+copy_staging_principals = f"COPY staging_imdb_principals FROM {config['DATA_PATH']['imdb_principals_path']} delimiter '\t' CSV HEADER"
+copy_staging_crew = f"COPY staging_imdb_crew FROM {config['DATA_PATH']['imdb_crew_path']} delimiter '\t' CSV HEADER"
+copy_staging_names = f"COPY staging_imdb_names FROM {config['DATA_PATH']['imdb_names_path']} delimiter '\t' CSV HEADER"
+copy_staging_rt = f"COPY staging_rotten_tomatoes_titles FROM {config['DATA_PATH']['rotten_tomatoes_movies_path']} delimiter ',' CSV HEADER"
+copy_staging_netflix = f"COPY staging_netflix_titles FROM {config['DATA_PATH']['netflix_titles_path']} delimiter ',' CSV HEADER"
 
 copy_table_queries = [copy_staging_titles, copy_staging_ratings, copy_staging_principals, copy_staging_crew,
                       copy_staging_names, copy_staging_rt, copy_staging_netflix]

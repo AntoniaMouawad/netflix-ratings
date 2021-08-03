@@ -39,13 +39,22 @@ As for the data cleaning and transformation steps:
 *If the data was increased by 100x*:
 - Definitely not use my local machine. I could alternatively
 - Use s3 storage due to its scalability and accessibility by other AWS services as well as redshift with a big cluster with multiple nodes
-- Or Use Spark and configure memory and number of processors and benefit from distributed processing, and Spin up a more powerful EMR clusters in order to handle a 100x bigger dataset
+- Or given that Apache Spark is linearly scalable, We may simply add the number of clusters to increase the performance. 
+- With AWS EMR we can adjust the size and number of clusters as we see fit.
 
 *If the pipelines were run on a daily basis by 7am.*:
-- Not really applicable in my case, but assuming we had the individual scores instead of the average, we'd only drop the dimension tables and append to the fact table 
+- Not really applicable in my case, but assuming we had the individual scores instead of the average, we can use a scheduler such as Airflow scheduler
+to monitors all tasks and all DAGs, and triggers the task instances to run every day with `schedule_interval='@daily'`, and we'd only drop the dimension tables and append to the fact table.
 
 *The database needed to be accessed by 100+ people*:
-- Make sure not everyone has write priviledges
+-  In order to scale horizontally, we need to add redundancy and make sure the data is available in multiple availability zones (to increase application availability).
+We can do that by using the Multi-AZ feature of `RDS`. RDS will create a standby database instance in a different AZ and replicate data to it synchronously.
+RDS will take the heavy lifting, we would only need to include retry logic into the database connection. 
+Additionally, to scale the database tier, we can use `Amazon RDS Read Replicas`.
+Horizontal scaling with RDS Multi-AZ, and RDS Read Replicas will allow the system to scale pretty far.
+Additional information can be found [here](https://aws.amazon.com/blogs/startups/scaling-on-aws-part-2-10k-users/)
+- Furthermore, we would need to manage the user access to the database and the resources. To do so we can use `AWS Single Sign-On` to create users, organize them in groups, and set permissions across those groups.
+More information on AWS Single Sign-On can be found [here](https://aws.amazon.com/blogs/security/how-to-create-and-manage-users-within-aws-sso/)
 
 ### Example queries
 Is there a correlation between:

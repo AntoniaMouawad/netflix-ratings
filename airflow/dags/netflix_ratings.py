@@ -30,7 +30,7 @@ start_operator = DummyOperator(task_id='start_execution', dag=dag)
 create_tables = PostgresOperator(task_id='create_tables',
                                  dag=dag,
                                  postgres_conn_id='redshift',
-                                 sql='/sql/create_tables.sql')
+                                 sql='/sql/create_tables.sql', database='dev')
 
 # Stage the tables
 stage_imdb_titles = StageToRedshiftOperator(

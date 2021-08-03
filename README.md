@@ -1,7 +1,77 @@
 # netflix-ratings
 imdb ratings, rotten tomatoes audience score and critics score for netflix titles
+
+Every time I am looking for what to watch next on netflix, I manually check the rotten tomatoes score of the netflix show, as well as its imdb score.
+The aim of this project is to combine the imdb score, the rotten tomatoes score, as well as metadata related to a netflix show in a clean way.
+The result can potentially be used by an app to display all the info related to a netflix show!
+
+### Data
+We use three main sources of data:
+- netflix: https://www.kaggle.com/shivamb/netflix-shows
+- imdb: https://datasets.imdbws.com/
+- rotten tomatoes: https://www.kaggle.com/stefanoleone992/rotten-tomatoes-movies-and-critic-reviews-dataset
+Data exploration and dictionary can be found in the notebook `final_project.ipynb`
+
+### Data Model
+Start schema with a bridge. 
+The dimension table is the titles, containing all the scores information.
+The reason for the bridge is that a person can have multiple roles in the show, this will allow us to normalize the table a bit further.
 ![Alt text](img/netflix-ratings.png?raw=true "data model")
 
+### Pipeline, Data cleaning and noteworthy steps
+We follow an ETL pipeline:
+- Extract all the data and loading into staging tables
+- Transform the tables 
+- Load into final tables
+
+As for the data cleaning and transformation steps:
+- Rows with missing values for writers/directors in the imdb set are dropped
+- Only kept title types `('tvSpecial', 'tvSeries', 'tvShort', 'movie', 'tvMovie', 'short', 'tvMiniSeries')` from the imdb dataset given the nature of the netflix shows
+- Split genres on ',' and fill up separate table with the values
+- The role table should only contain `('director', 'writer', 'actor', 'actress')`
+- The title table is the main table. We Join imdb, netflix and rt tables whenever :
+    - We find a lowercase matching title (somewhat a fuzzy match) 
+    - And at least either a director or an actor match
+    - And the year of release should match
+    - Netflix left join everything, in case we don't find a title/score match, we'd still want to keep the netflix info
+
+### Addressing Scenarios:
+*If the data was increased by 100x*:
+- Definitely not use my local machine. I could alternatively
+- Use s3 storage due to its scalability and accessibility by other AWS services as well as redshift with a big cluster with multiple nodes
+- Or Use Spark and configure memory and number of processors and benefit from distributed processing, and Spin up a more powerful EMR clusters in order to handle a 100x bigger dataset
+
+*If the pipelines were run on a daily basis by 7am.*:
+- Not really applicable in my case, but assuming we had the individual scores instead of the average, we'd only drop the dimension tables and append to the fact table 
+
+*The database needed to be accessed by 100+ people*:
+- Make sure not everyone has write priviledges
+
+### Example queries
+Is there a correlation between:
+- imdb and critics score?
+- critics score and audience score?
+![Alt text](img/correlation.png?raw=true "Correlation")
+
+Recommend horror movies released after 2016 with rotten tomatoes critics score higher than 70, ordered by imdb score
+![Alt text](img/recommendation.png?raw=true "Correlation")
+
+Please refer to the notebook `final_project.ipynb`
+
+### Choice of technology
+- Wanted to practice using postgresql.
+- The data model is well defined, so I thought a data warehouse would be more appropriate
+- Started building airflow dags but ran out of time. I'll finish that after the course's deadline
+![Alt text](img/airflow_graph.png?raw=true "Airflow DAG")
+
+
+### Future steps
+Due to time limits, and being a full timer, I won't have time to complete the airflow pipelines. 
+I'll finish them after the submission of the project. What's left:
+    - Move data to s3
+    - Use redshift as a data warehouse
+    - Run pipelines on schedule using airflow
+    
 ### Steps to run the project
 - Install the requirements: `pip install -r requirements.txt`
 - Start airflow: `sh airflow/start.sh`

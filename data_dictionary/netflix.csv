@@ -1,0 +1,11 @@
+Data Source,column_name,constraint,example,description
+Netflix,show_id,Primary key,S2,Unique ID for every Movie / Tv Show
+,type,NOT NULL,Movie,Identifier - A Movie or TV Show
+,title,NOT NULL,7:19,Title of the Movie / Tv Show
+,director,,Jorge Michel Grau,Director of the Movie
+,cast,,"Demián Bichir, Héctor Bonilla, Oscar Serrano,",Actors involved in the movie / show
+,country,,Mexico,Country where the movie / show was produced
+,date_added,,"December 23, 2016",Date it was added on Netflix
+,release_year,,2016,Actual Release year of the move / show
+,rating,,TV-MA,TV Rating of the movie / show
+,duration,,1h 33m,Total Duration - in minutes or number of seasons

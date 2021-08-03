@@ -1,0 +1,22 @@
+Data Source,column_name,constraint,example,description
+Rotten Tomatoes,movie_title,Primary key,m/0814255,title of the movie as displayed on the Rotten Tomatoes website
+,movie_info,,"Wisecracking mercenary Deadpool meets Russell, an angry teenage mutant who lives at an orphanage. When Russell becomes the target of Cable -- a genetically enhanced soldier from the future -- Deadpool realizes that he'll need some help saving the boy from",brief description of the movie
+,critics_consensus,,"High Life is as visually arresting as it is challenging, confounding, and ultimately rewarding - which is to say it's everything film fans expect from director Claire Denis.",comment from Rotten Tomatoes
+,content_rating,,R,category based on the movie suitability for audience
+,genres,,"Drama, Comedy","movie genres separated by commes, if multiple"
+,directors,,Clint Eastwood,name of director(s)
+,authors,,Woody Allen,name of author(s)
+,actors,,Chris Rock,name of actor
+,original_release_date,,6/7/2018,date in which the movie has been released
+,streaming_release_date,,2018-06-07,date in which the movie has been released for streaming
+,runtime,,109.23,Movie runtime in mins
+,production_company,,Warner Bros. Pictures,Name of production company
+,tomatometer_status,,Rotten,"tomatometer value of ""Rotten"" (less than 60% positive reviews), ""Fresh"" (at least 60% of positive reviews), and ""Certified Fresh"" (at least 75% of positive reviews, at least 80 reviews of which at least 5 from top critics)"
+,tomatometer_rating,,40,percentage of positive critic ratings
+,tomatometer_count,,112,critic ratings counted for the calculation of the tomatomer status
+,audience_status,,Spilled,"audience value of ""Spilled"" (less than 60% of users gave a rating of at least 3.5) or ""Upright"" (at least 60% of users gave a rating of at least 3.5)"
+,audience_rating,,50,percentage of positive user ratings
+,audience_count,,1335,user ratings counted for the calculation of the audience status
+,tomatometer_top_critics_count,,1314,count of top critic ratings
+,tomatometer_fresh_critics_count,,43,count of fresh critic ratings
+,tomatometer_rotten_critics_count,,15,count of rotten critic ratings
